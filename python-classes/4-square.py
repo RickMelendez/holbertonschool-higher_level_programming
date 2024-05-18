@@ -1,48 +1,62 @@
 #!/usr/bin/python3
+"""
+Module 4-square
+Defines class Square with private size and public area
+Can access and update size
+"""
 
 
 class Square:
     """
-    class square that has attributes:
-        size
-    some attributes are protected from input.
+    class Square definition
+
+    Args:
+        size (int): size of a side in square
+
+    Functions:
+        __init__(self, size)
+        size(self)
+        size(self, value)
+        area(self)
     """
+
     def __init__(self, size=0):
         """
-        initialization function for our square clasee
+        Initializes square
+
+        Attributes:
+            size (int): defaults to 0 if none; don't use __size to call setter
         """
-        if self.__validate_size(size):
-            self.__size = size
+        self.size = size
 
     @property
     def size(self):
-        """
-        getter for size attribute
+        """"
+        Getter
+
+        Return: size
         """
         return self.__size
 
     @size.setter
     def size(self, value):
         """
-        setter for size attribute
+        Setter
+
+        Args:
+            value: sets size to value, if int and >= 0
         """
-        if self.__validate_size(value):
+        if type(value) is not int:
+            raise TypeError("size must be an integer")
+        elif value < 0:
+            raise ValueError("size must be >= 0")
+        else:
             self.__size = value
 
     def area(self):
         """
-        calculates the area of the square
+        Calculates area of square
+        Returns:
+            area
         """
-        return self.__size ** 2
-
-    def __validate_size(self, size):
-        """
-        validates the size, checking for errors
-        """
-        if type(size) != int:
-            raise TypeError("size must be an integer")
-        elif size < 0:
-            raise ValueError("size must be >= 0")
-        else:
-            return True
-        return False
+        return (self.__size)**2

@@ -2,6 +2,7 @@
 """
     this is a empty class BaseGeometry.
     """
-class BaseGeometry:
 
+
+class BaseGeometry:
     pass

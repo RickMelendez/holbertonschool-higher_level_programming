@@ -5,17 +5,20 @@
 
 
 class BaseGeometry:
+    """
+    Contains functions area(), integer_validator()
+        """
     def area(self):
         """
-        Method to calculate the area, to be implemented in subclasses
+        Function not implemented yet
             """
         raise Exception(area() is not implemented)
 
     def integer_validator(self, name, value):
         """
-        Method to validate if a value is an integer and greater than 0
+        Function that validates `value`
             """
-        if value != 1:
-            raise TypeError()
-        elif value <= 0:
-            raise ValueError()
+        if type(value) != int:
+            raise TypeError(name + "must be an integer")
+        if value <= 0:
+            raise ValueError(name + "must be greater than 0")

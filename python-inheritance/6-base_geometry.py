@@ -1,15 +1,17 @@
 #!/usr/bin/python3
 """
-defines a new class named BaseGeometry.
-    """
+Module 6-base_geometry
+
+Contains empty class BaseGeometry
+with public instance method area
+"""
 
 
 class BaseGeometry:
+    """
+    Methods:
+        area(self)
+    """
     def area(self):
-        """
-        Define a public instance method named area.
-            """
-        raise Exception(area() is not implemented)
-        """
-        raise an exeption.
-            """
+        """not implemented"""
+        raise Exception("area() is not implemented")

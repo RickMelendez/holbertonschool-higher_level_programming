@@ -35,13 +35,3 @@ class VerboseList(list):
         item = super().pop(index)
         print("Popped {} from the list.".format(item))
         return item
-
-
-if __name__ == "__main__":
-    vlist = VerboseList()
-
-    vlist.append(10)
-    vlist.extend([20, 30, 40])
-    vlist.remove(20)
-    vlist.pop()
-    vlist.pop(0)

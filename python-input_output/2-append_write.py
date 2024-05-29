@@ -1,12 +1,12 @@
 #!/usr/bin/python3
-def read_lines(filename="", nb_lines=0):
-    with open(filename, encoding='utf-8') as f:
-        text = f.readlines()
-        tot_lines = len(text)
+"""append_write
+"""
 
-        if nb_lines <= 0 or nb_lines >= tot_lines:
-            f.seek(0)
-            print(f.read(), end='')
-        else:
-            for i in range(nb_lines):
-                print(text[i], end='')
+
+def append_write(filename="", text=""):
+    """Takes in str filename to write to, and str text to append to file
+    """
+
+    with open(filename, mode="a", encoding="utf-8") as appendFile:
+        appendFile.write(text)
+        return len(text)

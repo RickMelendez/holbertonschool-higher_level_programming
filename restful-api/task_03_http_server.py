@@ -27,8 +27,7 @@ class SimpleHTTPRequestHandler(BaseHTTPRequestHandler):
             self.send_response(200)
             self.send_header("Content-type", "application/json")
             self.end_headers()
-            status = {"status": "OK"}
-            self.wfile.write(json.dumps(status).encode())
+            self.wfile.write(b'OK')
         elif self.path == '/info':
             self.send_response(200)
             self.send_header("Content-type", "application/json")
@@ -37,19 +36,17 @@ class SimpleHTTPRequestHandler(BaseHTTPRequestHandler):
                 "version": "1.0",
                 "description": "A simple API built with http.server"
             }
-            self.wfile.write(json.dumps(info).encode())
+            self.wfile.write(json.dumps(info).encode)
         else:
             self.send_response(404)
             self.send_header("Content-type", "application/json")
             self.end_headers()
-            error_message = {"error": "Endpoint not found"}
-            self.wfile.write(json.dumps(error_message).encode())
+            self.wfile.write(b"404 Not Found")
 
 
 def run(server_class=HTTPServer, handler_class=SimpleHTTPRequestHandler):
     server_address = ('', 8000)
     httpd = server_class(server_address, handler_class)
-    print("Starting server on port 8000...")
     httpd.serve_forever()
 
 

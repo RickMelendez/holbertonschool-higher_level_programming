@@ -9,6 +9,7 @@ class SimpleHTTPRequestHandler(http.server.BaseHTTPRequestHandler):
     """Handles HTTP GET requests"""
 
     def do_GET(self):
+        print(f"Received GET request for path: {self.path}")
         if self.path == '/':
             self.send_response(200)
             self.send_header('Content-type', 'text/plain')
@@ -30,11 +31,14 @@ class SimpleHTTPRequestHandler(http.server.BaseHTTPRequestHandler):
             self.send_response(404)
             self.send_header('Content-type', 'application/json')
             self.end_headers()
-            error_message = {"error": "Not found"}
-            self.wfile.write(json.dumps(error_message).encode('utf-8'))
+            error_message = {"error": "Endpoint not found"}
+            self.wfile.write(
+                json.dumps(error_message).encode('utf-8')
+            )
 
 
-def run(server_class=http.server.HTTPServer, handler_class=SimpleHTTPRequestHandler, port=8000):
+def run(server_class=http.server.HTTPServer,
+        handler_class=SimpleHTTPRequestHandler, port=8000):
     """Runs the server"""
     server_address = ('', port)
     httpd = server_class(server_address, handler_class)

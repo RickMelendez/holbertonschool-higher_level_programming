@@ -9,13 +9,9 @@ from sys import argv
 
 if __name__ == '__main__':
     """
-    Access the database and get the states
+    Access to the database and get the states
     from the database.
     """
-    if len(argv) != 4:
-        print("Usage: {} <mysql username> <mysql password> <database name>".format(argv[0]))
-        exit(1)
-
     db = MySQLdb.connect(host="localhost", user=argv[1], port=3306,
                          passwd=argv[2], db=argv[3])
 
@@ -25,6 +21,3 @@ if __name__ == '__main__':
 
     for row in rows:
         print(row)
-
-    cur.close()
-    db.close()

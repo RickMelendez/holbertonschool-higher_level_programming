@@ -28,7 +28,7 @@ def contact():
 def items():
     with open('items.json', 'r') as f:
         items_data = json.load(f)
-    items_list = items_data.get('items', [])  # Retrieve the 'items' list from the loaded JSON data
+    items_list = items_data.get('items', [])
     return render_template('items.html', items=items_list)
 
 
@@ -61,9 +61,9 @@ def display_products():
     data = []
 
     if source == 'json':
-        data = read_json_file()  # Implement your read_json_file function here
-    elif source == 'csv':
-        data = read_csv_file()   # Implement your read_csv_file function here
+        data = read_json_file()
+
+        data = read_csv_file()
     elif source == 'sql':
         data = fetch_data_from_sqlite()
 
@@ -73,7 +73,7 @@ def display_products():
 
     # Filter by product_id if provided
     if product_id:
-        filtered_data = [product for product in data if str(product[0]) == product_id]
+        filtered_data = [product for product in data if str(product['id']) == product_id]
         if not filtered_data:
             return render_template('product_display.html', error='Product not found')
         data = filtered_data
@@ -93,7 +93,12 @@ def fetch_data_from_sqlite():
 
         conn.close()
 
-        return products
+        # Convert fetched data to a list of dictionaries
+        product_list = [{'id': row[0], 'name': row[1], 'category': row[2], 'price': row[3]} for row in products]
+
+        print("Products from SQLite:", product_list)  # Debug print
+
+        return product_list
 
     except sqlite3.Error as e:
         print(f"SQLite error: {e}")

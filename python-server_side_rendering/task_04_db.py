@@ -28,7 +28,7 @@ def contact():
 def items():
     with open('items.json', 'r') as f:
         items_data = json.load(f)
-    items_list = items_data.get('items', [])
+    items_list = items_data.get('items', [])  # Retrieve the 'items' list from the loaded JSON data
     return render_template('items.html', items=items_list)
 
 
@@ -36,6 +36,7 @@ def items():
 def read_json_file():
     with open('products.json', 'r') as json_file:
         data = json.load(json_file)
+    print("JSON Data Loaded:", data)  # Debug print
     return data
 
 
@@ -46,6 +47,7 @@ def read_csv_file():
         reader = csv.DictReader(csv_file)
         for row in reader:
             data.append(row)
+    print("CSV Data Loaded:", data)  # Debug print
     return data
 
 
@@ -61,9 +63,9 @@ def display_products():
     data = []
 
     if source == 'json':
-        data = read_json_file()
-
-        data = read_csv_file()
+        data = read_json_file()  # Implement your read_json_file function here
+    elif source == 'csv':
+        data = read_csv_file()   # Implement your read_csv_file function here
     elif source == 'sql':
         data = fetch_data_from_sqlite()
 
@@ -78,6 +80,7 @@ def display_products():
             return render_template('product_display.html', error='Product not found')
         data = filtered_data
 
+    print("Data to Render:", data)  # Debug print
     return render_template('product_display.html', products=data)
 
 
